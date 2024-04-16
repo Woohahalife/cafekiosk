@@ -17,7 +17,7 @@ import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 class OrderTest {
 
     @Test
-    @DisplayName("주문(Order) 생성 시 상품(Product) 리스트에서 주문의 총 금액을 계산한다.")
+    @DisplayName("주문(Order) 생성 시 상품(Product) 리스트에서 주문(Order)의 총 금액을 계산한다.")
     void calculateTotalPrice() {
         // given
         List<Product> products = List.of(
@@ -74,5 +74,4 @@ class OrderTest {
                 .name("메뉴 이름")
                 .build();
     }
-
 }

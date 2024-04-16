@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Entity
 @Getter
@@ -33,7 +32,7 @@ public class Order extends BaseEntity {
 
     // mappedBy = "order" : 연관관계의 주인이 order (orderProduct에서 가지고 있는 order로 설정)
     // cascade = CascadeType.ALL : 연관관계 주인이 생성, 삭제, 변경시 같이 작업이 일어나도록 설정
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order-orderProduct간 양방향 관계
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) // order-orderProduct 간 양방향 관계
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     private Order(List<Product> products, LocalDateTime registeredDateTime) {
