@@ -39,7 +39,7 @@ public class Order extends BaseEntity {
         this.orderStatus = OrderStatus.INIT;
         this.totalPrice = calculateTotalPrice(products);
         this.registeredDateTime =  registeredDateTime;// 테스트가 어려운 관계로 외부에서 시간을 주입 받음 - 컨트롤러에서부터 가져옴
-        this.orderProducts = products.stream()
+        this.orderProducts = products.stream() // order와 product를 orderProduct에 매핑
                 .map(product -> new OrderProduct(this, product))
                 .collect(Collectors.toList());
     }
