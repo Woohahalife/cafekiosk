@@ -8,7 +8,7 @@ import sample.cafekiosk.spring.domain.history.mail.MailSendHistoryRepository;
 
 @Service
 @RequiredArgsConstructor
-public class MailService { // 메일과 관련된 비즈니스 로직을 담당
+public class MailService { // 메일과 관련된 비즈니스 로직을 담당(전후 처리)
 
     private final MailSendClient mailSendClient;
     private final MailSendHistoryRepository mailSendHistoryRepository;
@@ -17,7 +17,7 @@ public class MailService { // 메일과 관련된 비즈니스 로직을 담당
 
         boolean result = mailSendClient.sendEmail(fromEmail, toEmail, subject, content);
 
-        if (result) {
+        if (result) { // 메일 전송이 정상 완료된 경우 전송 내역을 저장
             mailSendHistoryRepository.save(MailSendHistory.builder()
                     .fromEmail(fromEmail)
                     .toEmail(toEmail)
@@ -25,6 +25,10 @@ public class MailService { // 메일과 관련된 비즈니스 로직을 담당
                     .content(content)
                     .build()
             );
+
+            mailSendClient.a();
+            mailSendClient.b();
+            mailSendClient.c();
 
             return true;
         }
