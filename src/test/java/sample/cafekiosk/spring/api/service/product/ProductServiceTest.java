@@ -1,8 +1,6 @@
 package sample.cafekiosk.spring.api.service.product;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
@@ -29,6 +27,19 @@ class ProductServiceTest {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @BeforeAll
+    static void beforeAll() {
+        // before class
+    }
+
+    @BeforeEach
+    static void setUp() {
+        // before method
+        // 각 테스트 입장에서 봤을 때 : 아얘 몰라도 테스트를 이해하는데 문제가 없는가?
+        // 수정해도 모든 테스트에 영향을 주지 않는가?
+        // ex) 연관관계를 가진 엔티티 생성
+    }
 
     @AfterEach
     void tearDown() {
@@ -93,6 +104,9 @@ class ProductServiceTest {
                 );
     }
 
+    // 테스트 픽스처 생성 메서드의 파라미터는 테스트 클래스 내에서 필요한 것만 남기기
+    // 굳이 테스트에 필요하지 않은 파라미터는 제외하고 고정 값으로 설정하는 것도 관리하기 좋음
+    // 다른 클래스에서 재사용시 주입받는 파라미터를 필요에 맞게 조정하면 됨
     private Product createProduct(String productNumber, ProductType type, ProductSellingType sellingStatus, String name, int price) {
         return Product.builder()
                 .productNumber(productNumber)
