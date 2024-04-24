@@ -56,6 +56,17 @@ public class CafeKiosk {
         return new Order(currentDateTime, beverages);
     }
 
+//    public Order createOrder() { BAD : 외부에서 시간 관련 환경을 제어할 수 없음
+//        LocalDateTime currentDateTime = LocalDateTime.now();
+//        LocalTime currentTime = currentDateTime.toLocalTime();
+//
+//        if(currentTime.isBefore(SHOP_OPEN_TIME) || currentTime.isAfter(SHOP_CLOSE_TIME)) {
+//            throw new IllegalArgumentException("주문 시간이 아닙니다. 관리자에게 문의하세요");
+//        }
+//
+//        return new Order(currentDateTime, beverages);
+//    }
+
     public int calculateTotalPrice() {
         int totalPrice = 0;
 

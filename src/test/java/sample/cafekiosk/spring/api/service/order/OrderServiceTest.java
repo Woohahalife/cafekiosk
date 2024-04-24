@@ -149,6 +149,7 @@ class OrderServiceTest {
 
         productRepository.saveAll(List.of(product1, product2, product3));
 
+        // 상품별 재고 설정
         Stock stock1 = Stock.create("001", 2);
         Stock stock2 = Stock.create("002", 2);
 
