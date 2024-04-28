@@ -19,6 +19,7 @@ import static sample.cafekiosk.spring.domain.product.ProductSellingType.forDispl
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ProductNumberFactory productNumberFactory;
 
     public List<ProductResponse> getSellingProducts() {
 
@@ -35,7 +36,7 @@ public class ProductService {
     @Transactional
     public ProductResponse createProduct(ProductCreateServiceRequest request) {
 
-        String latestProductNumber = createNextProductNumber();
+        String latestProductNumber = productNumberFactory.createNextProductNumber();
         Product product = request.toEntity(latestProductNumber);
 
         Product savedProduct = productRepository.save(product);
@@ -43,16 +44,16 @@ public class ProductService {
         return ProductResponse.of(savedProduct);
     }
 
-    private String createNextProductNumber() { // 가장 최근의 productNumber를 조회해 +1 처리 후 양식에 맞게 반환
-
-        String latestProductNumber = productRepository.findLatestProduct();
-        if(latestProductNumber == null) {
-            return "001";
-        }
-
-        Integer nextProductNumberInt = Integer.parseInt(latestProductNumber) + 1;
-
-        return String.format("%03d", nextProductNumberInt);
-    }
+//    private String createNextProductNumber() { // 가장 최근의 productNumber를 조회해 +1 처리 후 양식에 맞게 반환
+//
+//        String latestProductNumber = productRepository.findLatestProduct();
+//        if(latestProductNumber == null) {
+//            return "001";
+//        }
+//
+//        Integer nextProductNumberInt = Integer.parseInt(latestProductNumber) + 1;
+//
+//        return String.format("%03d", nextProductNumberInt);
+//    }
 
 }
