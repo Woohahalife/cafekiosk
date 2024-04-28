@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.transaction.annotation.Transactional;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.order.response.OrderResponse;
@@ -25,12 +26,10 @@ import static org.assertj.core.api.Assertions.*;
 import static sample.cafekiosk.spring.domain.product.ProductSellingType.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
-@ActiveProfiles("test")
 //@Transactional //- @Transactional을 이 위치에서 사용할 시 문제가 생길 수 있음 ->
 // 테스트 상에서의 db내용을 초기화하지 않아도 된다는 편리한 점이 있지만, 실제 프로덕션 코드의 transactional 경계가 설정되어있는 것 처럼 테스트가 실행되기 때문에
 // 프로덕션 코드에서 설정되어야할 부분과 패러다임이 불일치할 수 있다.
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private OrderService orderService;
@@ -107,7 +106,7 @@ class OrderServiceTest {
         stockRepository.saveAll(List.of(stock1, stock2));
 
         OrderCreateServiceRequest request = OrderCreateServiceRequest.builder()
-                .productNumbers(List.of("001", "002"))
+                .productNumbers(List.of("001","001", "002", "003"))
                 .build();
 
         // when
@@ -153,7 +152,7 @@ class OrderServiceTest {
         Stock stock1 = Stock.create("001", 2);
         Stock stock2 = Stock.create("002", 2);
 
-        stock1.deductQuantity(1); // TODO
+        stock1.deductQuantity(1);
 
         stockRepository.saveAll(List.of(stock1, stock2));
 

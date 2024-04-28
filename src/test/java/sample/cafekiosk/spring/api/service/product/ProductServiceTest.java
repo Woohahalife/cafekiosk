@@ -4,6 +4,7 @@ import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import sample.cafekiosk.spring.IntegrationTestSupport;
 import sample.cafekiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import sample.cafekiosk.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk.spring.domain.product.Product;
@@ -18,9 +19,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static sample.cafekiosk.spring.domain.product.ProductSellingType.SELLING;
 import static sample.cafekiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService productService;
@@ -33,13 +32,13 @@ class ProductServiceTest {
         // before class
     }
 
-    @BeforeEach
-    static void setUp() {
+//    @BeforeEach
+//    static void setUp() {
         // before method
         // 각 테스트 입장에서 봤을 때 : 아얘 몰라도 테스트를 이해하는데 문제가 없는가?
         // 수정해도 모든 테스트에 영향을 주지 않는가?
         // ex) 연관관계를 가진 엔티티 생성
-    }
+//    }
 
     @AfterEach
     void tearDown() {
